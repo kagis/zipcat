@@ -1,6 +1,13 @@
 // https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
 // https://en.wikipedia.org/wiki/ZIP_(file_format)
 // https://github.com/Macil/deno_streaming_zip/blob/b3ca3537842f8045d88916c334e289032c74dd4a/write.ts
+
+/**
+ * Catenates multiple byte-streams into zip-stream
+ * @typedef {{ name: string, data: Uint8Array | AsyncIterable<Uint8Array> | Iterable<Uint8Array> }} ZipEntry
+ * @param {AsyncIterable<ZipEntry> | Iterable<ZipEntry>} files 
+ * @returns {AsyncIterable<Uint8Array>}
+ */
 export async function * zipcat(files) {
   const utf8enc = new TextEncoder();
   const hbuf = new Uint8Array(128);
